@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//cdn.sockjs.org/sockjs-0.3.min.js"></script>
+</head>
+<body>
+<h1>Node.js WebSocket Example</h1>
+<p>SockJS client: <span id="sockjs"></span></p>
+<p>Native WebSocket: <span id="websocket"></span></p>
+
+<script>
+    var sockjs = new SockJS('/random');
+    sockjs.onmessage = function(message) {
+        jQuery('#sockjs').text(message.data);
+    };
+</script>
+
+<script>
+    var ws = new WebSocket('ws://' + window.location.host + '/random/websocket');
+    ws.onmessage = function (message) {
+        jQuery('#websocket').text(message.data);
+    }
+</script>
+</body>
+</html>
